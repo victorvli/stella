@@ -1,0 +1,28 @@
+###服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka
+spring:
+  profiles:
+    active: jdbc
+  application:
+    ####注册中心应用名称
+    name: config-server
+    ###  配置数据库
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/configserver?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: gsh
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    config:
+      label: master
+      server:
+        jdbc: true
+#        sql: SELECT key1, value1 from config_properties where APPLICATION=? and PROFILE=? and LABEL=?
+####端口号
+server:
+  port: 8888
+### 查询数据库的sql语句，该语句的字段必须与数据库的表字段一致
+spring.cloud.config.server.jdbc.sql: SELECT key1, value1 from config_properties where APPLICATION=? and PROFILE=? and LABEL=?
